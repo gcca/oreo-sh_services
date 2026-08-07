@@ -1,0 +1,11 @@
+#!/bin/bash
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+while ! colima status &>/dev/null; do
+  colima start
+  sleep 5
+done
+cd /path/to/server && docker compose up -d
+/path/to/woodpecker-agent agent &
+
+tail -f /dev/null
